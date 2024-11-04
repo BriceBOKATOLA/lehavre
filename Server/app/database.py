@@ -13,7 +13,7 @@ def sql_connection():
 def CreateUser(con, data):
     query = "INSERT INTO user (username, pwd) VALUES(?,?)"
     try:
-        cur = con.cursor
+        cur = con.cursor()
         cur.execute(query, data)
         con.commit()
         print("Utilisateur ajouté.")
@@ -43,7 +43,7 @@ def ModifyUser(con, data, id):
 def CreateEvenement(con, data):
     query = "INSERT INTO event (title, date_begin, date_end, place, event_type, organisators, description) VALUES(?,?,?,?,?,?,?)"
     try:
-        cur = con.cursor
+        cur = con.cursor()
         cur.execute(query, data)
         con.commit()
         print("Evenement ajouté.")
