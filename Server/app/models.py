@@ -7,7 +7,7 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     pwd = Column(String) 
 
-class Evenement(Base):
+class Event(Base):
     __tablename__ = "event"
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
