@@ -4,7 +4,7 @@ from database import Base
 class User(Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, unique=True, index=True)
+    username = Column(String, unique=True)
     pwd = Column(String) 
 
 class Event(Base):
