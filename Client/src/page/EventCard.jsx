@@ -1,6 +1,5 @@
 import React from "react";
-import './App.css';
-import immg from '../src/image/theatre.jpg';
+import immg from '../image/theatre.jpg';
 
 const EventCard = () => {
   return (
