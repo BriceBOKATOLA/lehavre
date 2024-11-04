@@ -1,0 +1,9 @@
+.selected-cell {
+    background-color: #d4ebf2; /* Couleur de surlignage pour la date sélectionnée */
+  }
+  
+  .today-cell {
+    background-color: #f5a623; /* Couleur pour la date d'aujourd'hui */
+
+  }
+  
