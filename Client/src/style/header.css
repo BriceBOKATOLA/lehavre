@@ -17,9 +17,10 @@ body {
     justify-content: space-between;
     align-items: center;
     color: white;
-    background-color: #003366;
+    background-color: #1c194e;
     height: 5rem;
     font-family: 'Convergence', sans-serif;
+    margin-bottom: 3rem;
 }
 .header-logo img{
     top: -35px;
