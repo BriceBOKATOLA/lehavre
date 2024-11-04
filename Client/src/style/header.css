@@ -49,3 +49,36 @@ body {
 .header-menu img {
     height: 50px;
 }
+
+/* Pour les écrans larges */
+@media (min-width: 1200px) {
+    body {
+      font-size: 20px;
+    }
+  }
+  
+  /* Pour les tablettes */
+  @media (max-width: 768px) {
+    body {
+      font-size: 14px;
+    }
+  }
+  
+  /* Pour les mobiles */
+  @media (max-width: 930px) {
+    body {
+      font-size: 12px;
+    }
+    .header-text p {
+        display: none;
+    }
+
+    .header-menu p {
+        display: none;
+    }
+
+    .header-menu {
+        width: 4rem;
+        padding-left: 1rem;
+    }
+  }
