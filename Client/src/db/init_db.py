@@ -2,7 +2,7 @@ import sqlite3
 
 # Connexion à la base de données SQLite (ou création si elle n'existe pas encore)
 def init_db():
-    conn = sqlite3.connect("LHSM_evenements.db")
+    conn = sqlite3.connect("LHSM_events.db")
     cursor = conn.cursor()
 
     # Création de la table `user`
@@ -10,20 +10,20 @@ def init_db():
     CREATE TABLE IF NOT EXISTS user (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username VARCHAR(50) UNIQUE NOT NULL,
-        mdp TEXT NOT NULL -- Hachage du mot de passe stocké en tant que texte
+        pwd TEXT NOT NULL -- Hachage du mot de passe stocké en tant que texte
     )
     ''')
 
-    # Création de la table `evenement`
+    # Création de la table `event`
     cursor.execute('''
-    CREATE TABLE IF NOT EXISTS evenement (
+    CREATE TABLE IF NOT EXISTS event (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        titre VARCHAR(100) NOT NULL,
-        date_debut DATETIME NOT NULL,
-        date_fin DATETIME NOT NULL,
-        lieu VARCHAR(100) NOT NULL,
-        type_evenement VARCHAR(50) NOT NULL,
-        organisateurs TEXT NOT NULL,
+        title VARCHAR(100) NOT NULL,
+        date_begin DATETIME NOT NULL,
+        date_end DATETIME NOT NULL,
+        place VARCHAR(100) NOT NULL,
+        event_type VARCHAR(50) NOT NULL,
+        organisators TEXT NOT NULL,
         description TEXT
     )
     ''')
@@ -39,13 +39,13 @@ def init_db():
 
     # Insertion des événements
     cursor.executemany('''
-    INSERT INTO evenement (titre, date_debut, date_fin, lieu, type_evenement, organisateurs, description)
+    INSERT INTO event (title, date_begin, date_end, place, event_type, organisators, description)
     VALUES (?, ?, ?, ?, ?, ?, ?)
     ''', events)
 
     # Insertion d'un utilisateur
     cursor.execute('''
-    INSERT INTO user (username, mdp)
+    INSERT INTO user (username, pwd)
     VALUES (?, ?)
     ''', ("admin", "admin_password"))
 
