@@ -47,7 +47,7 @@ def init_db():
     cursor.execute('''
     INSERT INTO user (username, mdp)
     VALUES (?, ?)
-    ''', ("admin", "admin_password"))  # Remplacez "admin_password" par un mot de passe réel ou haché.
+    ''', ("admin", "admin_password"))
 
     # Sauvegarde et fermeture de la connexion
     conn.commit()
