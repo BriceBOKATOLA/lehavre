@@ -29,7 +29,7 @@ class Main:
 
         #DataBase.ModifyUser(self.con, ("janedoe2", "securepass4562"), 3)
         
-        #DataBase.DeleteUser(self.con, 4)
+        DataBase.DeleteUser(self.con, 4)
         # Exécuter les méthodes CRUD sur les événements
         for event in data['events']:
             # Créer un événement

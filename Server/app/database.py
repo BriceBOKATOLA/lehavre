@@ -17,12 +17,21 @@ class DataBase:
             print(Error)
 
     def CreateUser(con, data):
-        query = "INSERT INTO user (username, pwd) VALUES(?,?)"
+        query = "INSERT OR IGNORE INTO user (username, pwd) VALUES(?,?)"
         try:
             cur = con.cursor()
-            cur.execute(query, data)
-            con.commit()
-            print(f"Utilisateur {data[0]} ajouté")
+             # Check if the event was actually inserted
+            cur.execute("SELECT EXISTS(SELECT 1 FROM user WHERE username = ?)", 
+                        (data[0],))
+            exists = cur.fetchone()[0]  # fetchone returns a tuple
+
+            if exists:
+                print(f"L'utilisateur {data[0]} existe déjà.")
+            else:
+                cur.execute(query, data)
+                con.commit()
+                print(f"Utilisateur {data[0]} ajouté")
+
         except Error as e:
             print(f"Erreur lors de l'ajout de l'utilisateur: {e}")
 
@@ -30,12 +39,20 @@ class DataBase:
         query = "DELETE FROM user WHERE id = ? RETURNING username"
         try:
             cur = con.cursor()
-            cur.execute(query, (id,))
-            result = cur.fetchone()
+            cur.execute("SELECT username FROM user WHERE id = ?", (id,))
+            resultSelect = cur.fetchone()
 
-            if result:
-                con.commit()
-                print(f"Utilisateur {result[0]} supprimé.")
+            if resultSelect:  # Si l'utilisateur existe
+                cur.execute(query, (id,))
+                resultDelete = cur.fetchone()
+
+                if resultDelete:
+                    con.commit()
+                    print(f"Utilisateur {resultDelete[0]} supprimé.")
+
+            else:
+                print("L'utilisateur n'existe pas.")
+
         except Error as e:
             print(f"Erreur lors de la suppression de l'utilisateur: {e}")
 
@@ -43,9 +60,15 @@ class DataBase:
         query = "UPDATE user SET username = ?, pwd = ?  WHERE id = ?"
         try:
             cur = con.cursor()
-            cur.execute(query, (*data, id))
-            con.commit()
-            print(f"Utilisateur {data[0]} modifié.")
+            cur.execute("SELECT username FROM user WHERE id = ?", (id,))
+            resultSelect = cur.fetchone()
+
+            if resultSelect:
+                cur.execute(query, (*data, id))
+                con.commit()
+                print(f"Utilisateur {data[0]} modifié.")
+            else:
+                print(f"L'utilisateur {data[0]} n'existe pas")
         except Error as e:
             print(f"Erreur lors de la modification de l'utilisateur: {e}")
 
@@ -65,7 +88,7 @@ class DataBase:
                 cur.execute(query, data)
                 con.commit()
                 print(f"Evenement {data[0]} a été ajouté.")
-                
+
         except Error as e:
             print(f"Erreur lors de l'ajout de l'évenement: {e}")
 
@@ -73,12 +96,20 @@ class DataBase:
         query = "DELETE FROM event WHERE id = ? RETURNING title"
         try:
             cur = con.cursor()
-            cur.execute(query, (id,))
-            result = cur.fetchone()
+            cur.execute("SELECT title FROM event WHERE id = ?", (id,))
+            resultSelect = cur.fetchone()
 
-            if result:
-                con.commit()
-                print(f"Evenement {result[0]} supprimé.")
+            if resultSelect: 
+                cur.execute(query, (id,))
+                result = cur.fetchone()
+
+                if result:
+                    con.commit()
+                    print(f"Evenement {result[0]} supprimé.")
+
+            else:
+                print("L'évenement n'existe pas.")
+
         except Error as e:
             print(f"Erreur lors de la suppression de l'évenement: {e}")
 
@@ -86,8 +117,14 @@ class DataBase:
         query = "UPDATE event SET title = ?, date_begin = ? ,date_end = ? ,place = ? ,event_type = ? ,organisators = ? ,description = ?  WHERE id = ?"
         try:
             cur = con.cursor()
-            cur.execute(query, (*data, id))
-            con.commit()
-            print(f"Evenement {data[0]} modifié.")
+            cur.execute("SELECT title FROM event WHERE id = ?", (id,))
+            resultSelect = cur.fetchone()
+
+            if resultSelect:
+                cur.execute(query, (*data, id))
+                con.commit()
+                print(f"Evenement {data[0]} modifié.")
+            else:
+                print(f"Evenement {data[0]} n'existe pas.")
         except Error as e:
             print(f"Erreur lors de la modification de l'évenement: {e}")
