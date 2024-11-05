@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    background-color: #f3f2f7;
+    padding: 15px;
+    width: 30rem;
+    align-items: center;
+    text-align: center;
+}
+
+.container select {
+    background-color: #5dc08a;
+    color: white; 
+
+    border: 1px solid #5dc08a;
+    border-radius: 9px; 
+
+    text-align: center;
+}
