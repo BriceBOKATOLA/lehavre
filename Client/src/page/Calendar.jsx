@@ -21,7 +21,6 @@ const Calendar = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Calendrier des événements</h1>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
@@ -30,8 +29,8 @@ const Calendar = () => {
         dateClick={handleDateClick} // Gère les clics pour ajouter des événements
         headerToolbar={{
           left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
+          center: "",
+          right: '',
         }}
         selectable={true} // Permet la sélection de dates
         editable={true} // Permet de déplacer les événements
