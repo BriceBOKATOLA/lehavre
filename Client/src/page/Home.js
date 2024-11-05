@@ -1,4 +1,5 @@
 import React from "react";
+import Filter from "../composant/Filter";
 
 const Home = () => {
   return (

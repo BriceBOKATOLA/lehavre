@@ -15,17 +15,12 @@ const App = () => {
 
         <Header />
         
-        <nav style={styles.navbar}>
-          <Link to="/" style={styles.link}>Accueil</Link>
-          <Link to="/calendar" style={styles.link}>Calendrier</Link>
-          <Link to="/events" style={styles.link}>Evénement</Link>
-        </nav>
-
         <Routes>
           {/* Routes publiques */}
           <Route path="/" element={<Home />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/events" element={<Events />} />
+          <Route path="/card" element={<EventCard />} />
 
           {/* Route protégée */}
           <Route
