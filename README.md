@@ -18,4 +18,4 @@ Initier la Base de données
 -> cd Client\src\db
 -> python init_db.py
 
-//Assurez-vous d'avoir l'extension SQLite
+//Assurez-vous d'avoir l'extension SQLite, SQLViewer

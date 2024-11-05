@@ -50,20 +50,9 @@ const EventCard = ({ event }) => {
 const dummyEvents = [
   {
     title: "Titre événement",
-    image: "https://example.com/event-image.jpg", 
+    image: "image", 
   },
-  {
-    title: "Titre événement",
-    image: "https://example.com/event-image.jpg",
-  },
-  {
-    title: "Titre événement",
-    image: "https://example.com/event-image.jpg",
-  },
-  {
-    title: "Titre événement",
-    image: "https://example.com/event-image.jpg",
-  },
+
 ];
 
 // Styles en ligne pour l'interface
