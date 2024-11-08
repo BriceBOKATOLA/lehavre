@@ -28,6 +28,23 @@ async def get_evenement_by_id(evenement_id: int, db: Session = Depends(database.
     return schemas.EvenementBase(**evenement.__dict__)
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
+#   get by dates
+#-------------------------------------------------------------------------------------------------------------------------------------------
+@router.get("/weeklyEvents/}", response_model=schemas.EvenementBase)
+async def get_evenement_by_id(evenement_id: int, db: Session = Depends(database.get_db)):
+    weekArray = getWeek()
+    evenement = db.query(models.Evenement).filter(models.Evenement.date_debut >= weekArray[0], models.Evenement.date_debut <= weekArray[1]).first()
+    if not evenement:
+        raise HTTPException(status_code=404, detail="Evenement not found")
+    return schemas.EvenementBase(**evenement.__dict__)
+
+def getWeek():
+    today = datetime.today()
+    start_of_week = today - timedelta(days=today.weekday())
+    end_of_week = start_of_week + timedelta(days=6)
+    return [start_of_week, end_of_week]
+
+#-------------------------------------------------------------------------------------------------------------------------------------------
 #   create
 #-------------------------------------------------------------------------------------------------------------------------------------------
 @router.post("/evenement/", response_model=schemas.Evenement)
