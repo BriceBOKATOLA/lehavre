@@ -18,7 +18,7 @@ const FilterPanel = ({
             checked={selectedCategories.includes("Emploi")}
             onChange={onCategoryChange}
           />
-          Emploi / Travail
+         📃📚 Emploi / Travail
         </label>
       </div>
 

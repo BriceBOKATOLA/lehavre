@@ -11,14 +11,12 @@ import Events from "./Events";
 const Calendar = () => {
   const [events, setEvents] = useState([
     { title: "Événement 1", date: "2024-11-12", category: "Emploi", location: "Paris" },
-
   ]);
 
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("All");
   const [selectedMonth, setSelectedMonth] = useState(dayjs().format("YYYY-MM"));
 
-  // Référence pour accéder à l'instance de FullCalendar
   const calendarRef = useRef(null);
 
   const handleDateClick = (info) => {
@@ -47,7 +45,6 @@ const Calendar = () => {
   const handleMonthChange = (e) => {
     setSelectedMonth(e.target.value);
 
-    // Naviguer automatiquement vers le mois sélectionné dans FullCalendar
     const calendarApi = calendarRef.current.getApi();
     const selectedDate = dayjs(e.target.value).toDate();
     calendarApi.gotoDate(selectedDate);
@@ -60,10 +57,20 @@ const Calendar = () => {
     return isCategoryMatch && isLocationMatch && isMonthMatch;
   });
 
-  return (
-    <div style={{ padding: "20px" , margin: "50px" }}>
+  // Fonction pour ajouter l'icône dans chaque événement
+  const renderEventContent = (eventInfo) => (
+    <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+      {/* Icône de travail (peut être personnalisée) */}
+      <span role="img" aria-label="work-icon">📃📚</span> 
+      <span>{eventInfo.event.title}</span>
+    </div>
+  );
 
+  return (
+    <div style={{ padding: "20px", margin: "50px" }}>
       <h1>Calendrier des événements</h1>
+      
+      
       
       <FilterPanel
         selectedCategories={selectedCategories}
@@ -74,31 +81,33 @@ const Calendar = () => {
         onMonthChange={handleMonthChange}
       />
 
-<div style={styles.container}>
-      {/* Section du calendrier */}
-      <div style={styles.calendarContainer}>
+{/* Affichage du mois en cours */}
+<h2 style={styles.currentMonth}>{dayjs(selectedMonth).format("MMMM YYYY")}</h2>
 
-      <FullCalendar
-        ref={calendarRef} // Ajout de la référence
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        locale={frLocale}
-        events={filteredEvents}
-        dateClick={handleDateClick}
-        headerToolbar={{
-          left: "prev,next today",
-          center: "",
-          right: '',
-        }}
-        selectable={true}
-        editable={true}
-      />
-    </div>
-        {/* Section des événements */}
+      <div style={styles.container}>
+        <div style={styles.calendarContainer}>
+          <FullCalendar
+            ref={calendarRef}
+            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+            initialView="dayGridMonth"
+            locale={frLocale}
+            events={filteredEvents}
+            dateClick={handleDateClick}
+            headerToolbar={{
+              left: "prev,next today",
+              center: "",
+              right: '',
+            }}
+            selectable={true}
+            editable={true}
+            eventContent={renderEventContent} // Ajout de l'icône de travail
+          />
+        </div>
+        
         <div style={styles.eventsContainer}>
-        <Events showBackButton={false} /> {/* Cacher le bouton */}
+          <Events showBackButton={false} />
+        </div>
       </div>
-    </div>
     </div>
   );
 };
@@ -108,16 +117,23 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     padding: "20px",
-    gap: "20px", // Espace entre le calendrier et la section des événements
+    gap: "20px",
     margin: "50px",
   },
   calendarContainer: {
-    flex: 3, // Largeur pour le calendrier
+    flex: 3,
     minWidth: "600px",
   },
   eventsContainer: {
-    flex: 1, // Largeur pour la section des événements
+    flex: 1,
     minWidth: "300px",
+  },
+  currentMonth: {
+    fontSize: "20px",
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: "20px",
+    color: "#333",
   },
 };
 
