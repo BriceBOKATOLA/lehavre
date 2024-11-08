@@ -67,11 +67,7 @@ const Calendar = () => {
   );
 
   return (
-    <div style={{ padding: "20px", margin: "50px" }}>
-      <h1>Calendrier des événements</h1>
-      
-      
-      
+    <div style={{ padding: "20px" }}>
       <FilterPanel
         selectedCategories={selectedCategories}
         onCategoryChange={handleCategoryChange}
@@ -117,8 +113,7 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     padding: "20px",
-    gap: "20px",
-    margin: "50px",
+    gap: "20px", // Espace entre le calendrier et la section des événements
   },
   calendarContainer: {
     flex: 3,
