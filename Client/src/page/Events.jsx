@@ -1,21 +1,24 @@
 import React from "react";
 
-const Events = () => {
+const Events = ({ showBackButton = true }) => {
   return (
     <div style={styles.container}>
-      {/* Bouton de retour */}
-      <div style={styles.header}>
-        <button style={styles.backButton}>← Revenir au Calendrier</button>
-      </div>
-      
+      {/* Bouton de retour (affiché seulement si showBackButton est true) */}
+      {showBackButton && (
+        <div style={styles.header}>
+          <button style={styles.backButton}>← Revenir au Calendrier</button>
+        </div>
+      )}
+
       {/* Titre de la page */}
       <h1 style={styles.pageTitle}>ÉVÉNEMENTS DE LA SEMAINE</h1>
-      
+
       {/* Sections des événements */}
       <EventSection title="EMPLOI & FORMATION" events={dummyEvents} />
     </div>
   );
 };
+
 
 // Section des événements (Emploi & Formation)
 const EventSection = ({ title, events }) => {
@@ -39,8 +42,8 @@ const EventCard = ({ event }) => {
       <img src={event.image} alt="Event" style={styles.eventImage} />
       <div style={styles.eventInfo}>
         <h3 style={styles.eventTitle}>{event.title}</h3>
-        <p style={styles.eventDetails}>Horaires : Lun 12 Sept</p>
-        <p style={styles.eventDetails}>De ...h... à ...h...</p>
+        <p style={styles.eventDetails}>Horaires : Lun 12 Septembre</p>
+        <p style={styles.eventDetails}>De 12h00 à 17h00</p>
       </div>
     </div>
   );
@@ -50,7 +53,7 @@ const EventCard = ({ event }) => {
 const dummyEvents = [
   {
     title: "Titre événement",
-    image: "image", 
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
   },
 
 ];
@@ -80,7 +83,10 @@ const styles = {
     textAlign: "center",
     fontSize: "24px",
     fontWeight: "bold",
-    margin: "20px 0",
+    margin: "0",
+    padding: "10px 0",
+    backgroundColor:"#1A1A4E",
+    color: "#fff",
   },
   section: {
     marginBottom: "30px",
@@ -97,7 +103,7 @@ const styles = {
     display: "flex",
     flexWrap: "wrap",
     gap: "10px",
-    justifyContent: "space-evenly",
+    padding: "5px",
   },
   eventCard: {
     display: "flex",
@@ -105,7 +111,7 @@ const styles = {
     borderRadius: "4px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     overflow: "hidden",
-    width: "180px",
+    width: "300px",
   },
   eventImage: {
     width: "80px",
