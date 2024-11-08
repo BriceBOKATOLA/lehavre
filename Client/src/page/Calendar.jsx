@@ -124,10 +124,10 @@ const styles = {
     minWidth: "300px",
   },
   currentMonth: {
-    fontSize: "20px",
+    fontSize: "24px",
     fontWeight: "bold",
-    textAlign: "center",
     marginBottom: "20px",
+    padding: "20px 20px 0px 20px",
     color: "#333",
   },
 };
