@@ -1,8 +1,7 @@
 @font-face {
-    font-family: 'Convergence'; /* Nom que vous souhaitez donner à votre police */
+    font-family: 'Convergence';
     src: local('Convergence-Regular.ttf'),
          url('../font/Convergence-Regular.ttf') format('ttf');
-         /* url('../assets/fonts/NomDeMaPolice.woff') format('ttf'); */
     font-weight: normal;
     font-style: normal;
   }

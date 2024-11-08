@@ -7,6 +7,7 @@ import NotFound from "./page/NotFound";
 import ProtectedRoute from "./composant/ProtectedRoute";
 import EventCard from "./page/EventCard";
 import Header from "./composant/Header";
+import "../src/style/app.css";
 
 const App = () => {
   return (

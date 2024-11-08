@@ -4,21 +4,12 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import frLocale from "@fullcalendar/core/locales/fr";
-import dayjs from "dayjs";
-import FilterPanel from "../composant/filtrePanel";
 
 const Calendar = () => {
   const [events, setEvents] = useState([
-    { title: "Événement 1", date: "2024-11-12", category: "Emploi", location: "Paris" },
-
+    { title: "Événement 1", date: "2024-11-12" },
+    { title: "Événement 2", date: "2024-11-15" },
   ]);
-
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState("All");
-  const [selectedMonth, setSelectedMonth] = useState(dayjs().format("YYYY-MM"));
-
-  // Référence pour accéder à l'instance de FullCalendar
-  const calendarRef = useRef(null);
 
   const handleDateClick = (info) => {
     const title = prompt("Entrez le titre de l'événement:");
@@ -61,35 +52,43 @@ const Calendar = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-
-      <h1>Calendrier des événements</h1>
-      
-      <FilterPanel
-        selectedCategories={selectedCategories}
-        onCategoryChange={handleCategoryChange}
-        selectedLocation={selectedLocation}
-        onLocationChange={handleLocationChange}
-        selectedMonth={selectedMonth}
-        onMonthChange={handleMonthChange}
-      />
-
       <FullCalendar
-        ref={calendarRef} // Ajout de la référence
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        locale={frLocale}
-        events={filteredEvents}
-        dateClick={handleDateClick}
+        locale={frLocale} // Définit la langue française
+        events={events} // Passe les événements existants
+        dateClick={handleDateClick} // Gère les clics pour ajouter des événements
         headerToolbar={{
           left: "prev,next today",
           center: "",
           right: '',
         }}
-        selectable={true}
-        editable={true}
+        selectable={true} // Permet la sélection de dates
+        editable={true} // Permet de déplacer les événements
       />
     </div>
   );
+};
+
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "row",      // Aligne les éléments horizontalement
+    padding: "20px",
+    gap: "20px",               // Espace entre le calendrier et les événements
+    margin: "50px",
+  },
+  calendarContainer: {
+    flex: 3,                   // Largeur pour le calendrier
+    minWidth: "600px",
+  },
+  eventsContainer: {
+    flex: 1,                   // Largeur pour la section des événements
+    minWidth: "300px",
+    display: "flex",           // Assure que les événements sont bien alignés horizontalement
+    flexDirection: "column",   // Garde les événements dans une colonne si nécessaire
+    gap: "20px",               // Espacement entre les événements
+  },
 };
 
 export default Calendar;

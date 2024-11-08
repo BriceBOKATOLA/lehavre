@@ -57,7 +57,7 @@ const styles = {
     backgroundColor: "#F9F9F9",
     borderRadius: "8px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    padding: "16px",
+    padding: "6px",
     fontFamily: "Arial, sans-serif",
   },
   imageContainer: {

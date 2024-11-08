@@ -1,0 +1,45 @@
+{
+    "user": [
+        {
+            "username": "johndoe",
+            "pwd": "password123"
+        },
+        {
+            "username": "janedoe",
+            "pwd": "securepass456"
+        },
+        {
+            "username": "alexsmith",
+            "pwd": "pass789"
+        }
+    ],
+    "events": [
+        {
+            "title": "Tech Conference 2024",
+            "date_begin": "2024-03-15T09:00:00",
+            "date_end": "2024-03-15T18:00:00",
+            "place": "New York Convention Center",
+            "event_type": "Conference",
+            "organisators": "Tech Corp",
+            "description": "A conference bringing together leading tech experts and enthusiasts."
+        },
+        {
+            "title": "Art Expo",
+            "date_begin": "2024-04-20T10:00:00",
+            "date_end": "2024-04-25T17:00:00",
+            "place": "Downtown Art Gallery",
+            "event_type": "Exhibition",
+            "organisators": "City Arts",
+            "description": "An exhibition showcasing works from local and international artists."
+        },
+        {
+            "title": "Music Festival",
+            "date_begin": "2024-06-10T12:00:00",
+            "date_end": "2024-06-12T23:00:00",
+            "place": "Central Park",
+            "event_type": "Festival",
+            "organisators": "Live Nation",
+            "description": "Three days of live music from a variety of genres, food, and entertainment."
+        }
+    ]
+}
