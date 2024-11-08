@@ -7,6 +7,7 @@ import NotFound from "./page/NotFound";
 import ProtectedRoute from "./composant/ProtectedRoute";
 import EventCard from "./page/EventCard";
 import Header from "./composant/Header";
+import Database from "./db/database";
 
 const App = () => {
   return (
@@ -21,6 +22,8 @@ const App = () => {
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/events" element={<Events />} />
           <Route path="/card" element={<EventCard />} />
+          <Route path="/test" element={<Database />} />
+
 
           {/* Route protégée */}
           <Route

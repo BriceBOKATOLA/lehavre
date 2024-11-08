@@ -1,1 +1,5 @@
 Client/node_modules/
+/Server/env/Lib
+/Server/env
+/Server/api/__pycache__
+/Server/api/routes/__pycache__
