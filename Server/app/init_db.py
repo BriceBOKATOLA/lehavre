@@ -10,7 +10,7 @@ class InitDb:
 
     @staticmethod
     def init_db():
-        conn = sqlite3.connect("..\\..\\Client\\src\\db\\LHSM_events.db")
+        conn = sqlite3.connect("../DataBase/LHSM_events.db")
         cursor = conn.cursor()
         
         # Création de la table `user`
@@ -27,9 +27,9 @@ class InitDb:
             print("Table 'user' existe déjà.")
 
         # Création de la table `event`
-        if InitDb.table_exists(conn, "event"):
+        if InitDb.table_exists(conn, "events"):
             cursor.execute('''
-            CREATE TABLE IF NOT EXISTS event (
+            CREATE TABLE IF NOT EXISTS events (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title VARCHAR(100) NOT NULL,
                 date_begin DATETIME NOT NULL,
@@ -41,9 +41,9 @@ class InitDb:
                 UNIQUE(title, date_begin, place)
             )
             ''')
-            print("Table 'event' créée.")
+            print("Table 'events' créée.")
         else:
-            print("Table 'event' existe déjà.")
+            print("Table 'events' existe déjà.")
 
         # Liste des événements à insérer
         events = [
@@ -56,7 +56,7 @@ class InitDb:
 
         # Insertion des événements
         cursor.executemany('''
-        INSERT OR IGNORE INTO event (title, date_begin, date_end, place, event_type, organisators, description)
+        INSERT OR IGNORE INTO events (title, date_begin, date_end, place, event_type, organisators, description)
         VALUES (?, ?, ?, ?, ?, ?, ?) 
         ''', events)
 

@@ -3,12 +3,13 @@ from datetime import datetime, date
 from pydantic import BaseModel, EmailStr
 
 class EvenementBase(BaseModel):
-    titre: str
-    date_debut: datetime
-    date_fin: datetime
-    lieu: str
-    type_evenement: str
-    organisateurs: str
+    title : str
+    date_begin : datetime
+    date_end : datetime
+    place : str
+    event_type : str
+    organisators : str
+    description : str
 
 class EvenementCreate(EvenementBase):
     pass

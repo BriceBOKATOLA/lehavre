@@ -74,7 +74,7 @@ class DataBase:
             print(f"Erreur lors de la modification de l'utilisateur: {e}")
 
     def ShowEvents(con):
-        query = ("SELECT title, date_begin, date_end, place, event_type, organisators, description FROM event WHERE ")
+        query = ("SELECT title, date_begin, date_end, place, event_type, organisators, description FROM events WHERE ")
         try:
             cur = con.cursor()        
             cur.execute(query)
@@ -94,7 +94,7 @@ class DataBase:
         start_str = start.strftime("%Y-%m-%dT%H:%M:%S")        
         end_str = end.strftime("%Y-%m-%dT%H:%M:%S")
 
-        query = (f"SELECT title, date_begin, date_end, place, event_type, organisators, description FROM event WHERE date_begin >= ? AND date_begin <= ?")
+        query = (f"SELECT title, date_begin, date_end, place, event_type, organisators, description FROM events WHERE date_begin >= ? AND date_begin <= ?")
         try:
             cur = con.cursor()        
             cur.execute(query, (start_str, end_str))
@@ -112,7 +112,7 @@ class DataBase:
             else:
                 clause += f" '{type[i]}'"
 
-        query = (f"SELECT title, date_begin, date_end, place, event_type, organisators, description FROM event {clause} ORDER BY date(date_begin) DESC")
+        query = (f"SELECT title, date_begin, date_end, place, event_type, organisators, description FROM events {clause} ORDER BY date(date_begin) DESC")
         
         try:
             cur = con.cursor()        
@@ -124,12 +124,12 @@ class DataBase:
             return []
 
     def CreateEvent(con, data):
-        query = ("INSERT OR IGNORE INTO event (title, date_begin, date_end, place, event_type, organisators, description) "
+        query = ("INSERT OR IGNORE INTO events (title, date_begin, date_end, place, event_type, organisators, description) "
                  "VALUES(?,?,?,?,?,?,?)")
         try:
             cur = con.cursor()
              # Check if the event was actually inserted
-            cur.execute("SELECT EXISTS(SELECT 1 FROM event WHERE title = ? AND date_begin = ? AND place = ?)", 
+            cur.execute("SELECT EXISTS(SELECT 1 FROM events WHERE title = ? AND date_begin = ? AND place = ?)", 
                         (data[0], data[1], data[3]))
             exists = cur.fetchone()[0]  # fetchone returns a tuple
             if exists:
@@ -144,10 +144,10 @@ class DataBase:
             print(f"Erreur lors de l'ajout de l'évenement: {e}")
 
     def DeleteEvent(con, id):
-        query = "DELETE FROM event WHERE id = ? RETURNING title"
+        query = "DELETE FROM events WHERE id = ? RETURNING title"
         try:
             cur = con.cursor()
-            cur.execute("SELECT title FROM event WHERE id = ?", (id,))
+            cur.execute("SELECT title FROM events WHERE id = ?", (id,))
             resultSelect = cur.fetchone()
 
             if resultSelect: 
@@ -165,10 +165,10 @@ class DataBase:
             print(f"Erreur lors de la suppression de l'évenement: {e}")
 
     def UpdateEvent(con, data, id):
-        query = "UPDATE event SET title = ?, date_begin = ? ,date_end = ? ,place = ? ,event_type = ? ,organisators = ? ,description = ?  WHERE id = ?"
+        query = "UPDATE events SET title = ?, date_begin = ? ,date_end = ? ,place = ? ,event_type = ? ,organisators = ? ,description = ?  WHERE id = ?"
         try:
             cur = con.cursor()
-            cur.execute("SELECT title FROM event WHERE id = ?", (id,))
+            cur.execute("SELECT title FROM events WHERE id = ?", (id,))
             resultSelect = cur.fetchone()
 
             if resultSelect:

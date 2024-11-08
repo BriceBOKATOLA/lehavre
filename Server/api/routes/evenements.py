@@ -12,17 +12,17 @@ router = APIRouter()
 #   get all
 #-------------------------------------------------------------------------------------------------------------------------------------------
 
-@router.get("/evenements/", response_model=list[schemas.Evenement])
-async def get_all_equipements(db: Session = Depends(database.get_db)):
-    evenements = db.query(models.Evenement).all()
+@router.get("/events/", response_model=list[schemas.Evenement])
+async def get_all(db: Session = Depends(database.get_db)):
+    evenements = db.query(models.Events).all()
     return [schemas.Evenement(**evenement.__dict__) for evenement in evenements]
 
 #-------------------------------------------------------------------------------------------------------------------------------------------
 #   get by id
 #-------------------------------------------------------------------------------------------------------------------------------------------
-@router.get("/evenement/{evenement_id}", response_model=schemas.EvenementBase)
+@router.get("/events/{evenement_id}", response_model=schemas.EvenementBase)
 async def get_evenement_by_id(evenement_id: int, db: Session = Depends(database.get_db)):
-    evenement = db.query(models.Evenement).filter(models.Evenement.id == evenement_id).first()
+    evenement = db.query(models.Events).filter(models.Events.id == evenement_id).first()
     if not evenement:
         raise HTTPException(status_code=404, detail="Evenement not found")
     return schemas.EvenementBase(**evenement.__dict__)
@@ -30,13 +30,13 @@ async def get_evenement_by_id(evenement_id: int, db: Session = Depends(database.
 #-------------------------------------------------------------------------------------------------------------------------------------------
 #   get by dates
 #-------------------------------------------------------------------------------------------------------------------------------------------
-@router.get("/weeklyEvents/}", response_model=schemas.EvenementBase)
-async def get_evenement_by_id(evenement_id: int, db: Session = Depends(database.get_db)):
+@router.get("/weeklyEvents/}", response_model=list[schemas.Evenement])
+async def get_evenement_by_id(db: Session = Depends(database.get_db)):
     weekArray = getWeek()
-    evenement = db.query(models.Evenement).filter(models.Evenement.date_debut >= weekArray[0], models.Evenement.date_debut <= weekArray[1]).first()
-    if not evenement:
+    evenements = db.query(models.Events).filter(models.Events.date_begin >= weekArray[0], models.Events.date_begin <= weekArray[1]).all()
+    if not evenements:
         raise HTTPException(status_code=404, detail="Evenement not found")
-    return schemas.EvenementBase(**evenement.__dict__)
+    return [schemas.Evenement(**evenement.__dict__) for evenement in evenements]
 
 def getWeek():
     today = datetime.today()
@@ -47,9 +47,9 @@ def getWeek():
 #-------------------------------------------------------------------------------------------------------------------------------------------
 #   create
 #-------------------------------------------------------------------------------------------------------------------------------------------
-@router.post("/evenement/", response_model=schemas.Evenement)
+@router.post("/events/", response_model=schemas.Evenement)
 async def create_equipement(evenement: schemas.EvenementCreate, db: Session = Depends(database.get_db)):
-    db_evenement = models.Evenement(**evenement.dict())
+    db_evenement = models.Events(**evenement.dict())
     db.add(db_evenement)
     db.commit()
     db.refresh(db_evenement)  # Recharge l'objet pour inclure les valeurs générées, comme l'ID
@@ -58,9 +58,9 @@ async def create_equipement(evenement: schemas.EvenementCreate, db: Session = De
 #-------------------------------------------------------------------------------------------------------------------------------------------
 #   update
 #-------------------------------------------------------------------------------------------------------------------------------------------
-@router.put("/evenement/{evenement_id}", response_model=schemas.EvenementBase)
+@router.put("/events/{evenement_id}", response_model=schemas.EvenementBase)
 async def update_equipement(evenement_id: int, evenement: schemas.EvenementBase, db: Session = Depends(database.get_db)):
-    db_evenement = db.query(models.Evenement).filter(models.Evenement.id == evenement_id).first()
+    db_evenement = db.query(models.Events).filter(models.Events.id == evenement_id).first()
     if not db_evenement:
         raise HTTPException(status_code=404, detail="Evenement not found")
     for key, value in evenement.dict().items():

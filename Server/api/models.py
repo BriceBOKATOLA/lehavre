@@ -1,13 +1,14 @@
 from sqlalchemy import Column, Integer, String, DateTime
 import database
 
-class Evenement(database.Base):
-    __tablename__ = "evenement"
+class Events(database.Base):
+    __tablename__ = "events"
     
     id = Column(Integer, primary_key=True, index=True)
-    titre = Column(String)
-    date_debut = Column(DateTime)
-    date_fin = Column(DateTime)
-    lieu = Column(String, index=True)
-    type_evenement = Column(String, index=True)
-    organisateurs = Column(String, index=True)
+    title = Column(String)
+    date_begin = Column(DateTime)
+    date_end = Column(DateTime)
+    place = Column(String)
+    event_type = Column(String)
+    organisators = Column(String)
+    description = Column(String)
