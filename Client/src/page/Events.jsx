@@ -1,33 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Events = () => {
+const Events = ({ showBackButton = true }) => {
+  // État pour savoir si l'on affiche tous les événements ou seulement 5
+  const [showAllEvents, setShowAllEvents] = useState(false);
+
+  // Fonction pour basculer l'état de l'affichage
+  const handleShowMore = () => {
+    setShowAllEvents(!showAllEvents);
+  };
+
   return (
     <div style={styles.container}>
-      {/* Bouton de retour */}
-      <div style={styles.header}>
-        <button style={styles.backButton}>← Revenir au Calendrier</button>
-      </div>
-      
+      {/* Bouton de retour (affiché seulement si showBackButton est true) */}
+      {showBackButton && (
+        <div style={styles.header}>
+          <button style={styles.backButton}>← Revenir au Calendrier</button>
+        </div>
+      )}
+
       {/* Titre de la page */}
       <h1 style={styles.pageTitle}>ÉVÉNEMENTS DE LA SEMAINE</h1>
-      
+
       {/* Sections des événements */}
-      <EventSection title="EMPLOI & FORMATION" events={dummyEvents} />
+      <EventSection title="EMPLOI & FORMATION" events={dummyEvents} showAll={showAllEvents} />
+      
+      {/* Bouton pour voir plus d'événements */}
+      <div style={styles.showMoreButtonContainer}>
+        <button style={styles.showMoreButton} onClick={handleShowMore}>
+          {showAllEvents ? "Voir moins d'événements" : "Voir plus d'événements"}
+        </button>
+      </div>
     </div>
   );
 };
 
 // Section des événements (Emploi & Formation)
-const EventSection = ({ title, events }) => {
+const EventSection = ({ title, events, showAll }) => {
+  // Limiter l'affichage à 5 événements
+  const eventsToDisplay = showAll ? events : events.slice(0, 5);
+
   return (
     <div style={styles.section}>
       <h2 style={styles.sectionTitle}>{title}</h2>
-      <div style={styles.eventRow}>
-        {events.map((event, index) => (
-          <EventCard key={index} event={event} />
-        ))}
-      </div>
-      <hr style={styles.divider} />
+      {eventsToDisplay.map((event, index) => (
+        <React.Fragment key={index}>
+          <EventCard event={event} />
+          {/* Ajoute une ligne de séparation sauf après le dernier événement */}
+          {index < eventsToDisplay.length - 1 && <hr style={styles.divider} />}
+        </React.Fragment>
+      ))}
     </div>
   );
 };
@@ -39,8 +60,8 @@ const EventCard = ({ event }) => {
       <img src={event.image} alt="Event" style={styles.eventImage} />
       <div style={styles.eventInfo}>
         <h3 style={styles.eventTitle}>{event.title}</h3>
-        <p style={styles.eventDetails}>Horaires : Lun 12 Sept</p>
-        <p style={styles.eventDetails}>De ...h... à ...h...</p>
+        <p style={styles.eventDetails}>Horaires : Lun 12 Septembre</p>
+        <p style={styles.eventDetails}>De 12h00 à 17h00</p>
       </div>
     </div>
   );
@@ -49,10 +70,33 @@ const EventCard = ({ event }) => {
 // Données d'exemple
 const dummyEvents = [
   {
-    title: "Titre événement",
-    image: "image", 
+    title: "Titre événement 1",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
   },
-
+  {
+    title: "Titre événement 2",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
+  {
+    title: "Titre événement 3",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
+  {
+    title: "Titre événement 4",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
+  {
+    title: "Titre événement 5",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
+  {
+    title: "Titre événement 6",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
+  {
+    title: "Titre événement 7",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
 ];
 
 // Styles en ligne pour l'interface
@@ -80,7 +124,10 @@ const styles = {
     textAlign: "center",
     fontSize: "24px",
     fontWeight: "bold",
-    margin: "20px 0",
+    margin: "0",
+    padding: "10px 0",
+    backgroundColor:"#1A1A4E",
+    color: "#fff",
   },
   section: {
     marginBottom: "30px",
@@ -93,19 +140,13 @@ const styles = {
     marginBottom: "10px",
     paddingLeft: "10px",
   },
-  eventRow: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "10px",
-    justifyContent: "space-evenly",
-  },
   eventCard: {
     display: "flex",
     backgroundColor: "#fff",
     borderRadius: "4px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     overflow: "hidden",
-    width: "180px",
+    width: "300px",
   },
   eventImage: {
     width: "80px",
@@ -133,6 +174,19 @@ const styles = {
     width: "95%",
     marginLeft: "auto",
     marginRight: "auto",
+  },
+  showMoreButtonContainer: {
+    textAlign: "center",
+    marginTop: "20px",
+  },
+  showMoreButton: {
+    backgroundColor: "#4CAF50",
+    color: "#fff",
+    padding: "8px 16px",
+    border: "none",
+    borderRadius: "4px",
+    fontWeight: "bold",
+    cursor: "pointer",
   },
 };
 
