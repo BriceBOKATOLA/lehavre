@@ -1,6 +1,7 @@
 # Create CRUD for Database in SQLite3
 import sqlite3
 from sqlite3 import Error
+from datetime import datetime, timedelta
 
 class DataBase:
     def sql_connection(db_path):
@@ -72,8 +73,8 @@ class DataBase:
         except Error as e:
             print(f"Erreur lors de la modification de l'utilisateur: {e}")
 
-    def ShowEvent(con):
-        query = ("SELECT title, date_begin, date_end, place, event_type, organisators, description FROM event")
+    def ShowEvents(con):
+        query = ("SELECT title, date_begin, date_end, place, event_type, organisators, description FROM event WHERE ")
         try:
             cur = con.cursor()        
             cur.execute(query)
@@ -83,6 +84,26 @@ class DataBase:
         except Error as e:
             return []
         
+    def ShowEventsByWeek(con):
+        day = str(datetime.today().strftime('%Y-%m-%dT%H:%M:%S'))
+        dt = datetime.strptime(day, '%Y-%m-%dT%H:%M:%S') #"2024-11-06T08:00:00"
+
+        start = dt - timedelta(days=dt.weekday())
+        end = start + timedelta(days=6)
+
+        start_str = start.strftime("%Y-%m-%dT%H:%M:%S")        
+        end_str = end.strftime("%Y-%m-%dT%H:%M:%S")
+
+        query = (f"SELECT title, date_begin, date_end, place, event_type, organisators, description FROM event WHERE date_begin >= ? AND date_begin <= ?")
+        try:
+            cur = con.cursor()        
+            cur.execute(query, (start_str, end_str))
+            rows = cur.fetchall()
+            return rows
+
+        except Error as e:
+            return []
+
     def ShowEventByFilter(con, type):
         clause = "WHERE event_type ="
         for i in range(0, len(type)):
@@ -91,7 +112,7 @@ class DataBase:
             else:
                 clause += f" '{type[i]}'"
 
-        query = (f"SELECT title, date_begin, date_end, place, event_type, organisators, description FROM event {clause}")
+        query = (f"SELECT title, date_begin, date_end, place, event_type, organisators, description FROM event {clause} ORDER BY date(date_begin) DESC")
         
         try:
             cur = con.cursor()        

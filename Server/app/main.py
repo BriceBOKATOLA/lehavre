@@ -11,14 +11,11 @@ class Main:
     def __init__(self):
         self.file_path_json = '..\\Data\\data.json'
         self.db_path = '..\\..\\Client\\src\\db\\LHSM_events.db'
-        #self.db_initializer = InitDb
         self.con = DataBase.sql_connection(self.db_path)  # Connexion à la base de données
         self.data_extractor = DataExtractor(self.file_path_json, self.db_path)
 
     def run(self):
-        #self.db_initializer.init_db()
         InitDb.init_db()
-        # Connexion à la base de données
         # Charger les données JSON
         data = self.data_extractor.load_json()
         # Exécuter les méthodes CRUD sur les utilisateurs
@@ -27,9 +24,6 @@ class Main:
             # Créer un utilisateur
             DataBase.CreateUser(self.con, (user['username'], user['pwd']))
 
-        #DataBase.ModifyUser(self.con, ("janedoe2", "securepass4562"), 3)
-        
-        #DataBase.DeleteUser(self.con, 4)
         # Exécuter les méthodes CRUD sur les événements
         for event in data['events']:
             # Créer un événement
@@ -42,7 +36,7 @@ class Main:
                 event['organisators'], 
                 event['description']
             ))
-        print(DataBase.ShowEventByFilter(self.con, ["Marché", "Concert"]))
+
         # Fermer la connexion
         DataBase.sql_close(self.con)
 
