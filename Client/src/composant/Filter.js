@@ -7,6 +7,11 @@ import '../style/filter.css'
 export default function Filter() {
     const [evenementIsChecked, setEvenementIsChecked] = useState(false);
     const [formationIsChecked, setFormationIsChecked] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(1);
+
+    const handleChange = (event) => {
+        setSelectedOption(event.target.value);
+    }
 
     const evenementChange = (event) => {
         setEvenementIsChecked(event.target.checked);
@@ -16,10 +21,14 @@ export default function Filter() {
         setFormationIsChecked(event.target.checked)
     }
 
+    const controlePeriode = ({ onViewChange }) => {
+
+    }
+
   return (
     <div class="container">
         <div>
-            <select name="period" id="period">
+            <select value={selectedOption} onChange={handleChange}>
                 <option value="1" >Mois</option>
                 <option value="2" >Semaine</option>
                 <option value="3" >Jours</option>

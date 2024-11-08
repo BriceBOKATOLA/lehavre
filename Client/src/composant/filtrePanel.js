@@ -1,6 +1,4 @@
 // FiltrePanel.js
-import React from "react";
-
 const FilterPanel = ({
   selectedCategories,
   onCategoryChange,
@@ -27,10 +25,8 @@ const FilterPanel = ({
       <label style={{ marginLeft: "20px" }}>Filtrer par lieu : </label>
       <select value={selectedLocation} onChange={onLocationChange}>
         <option value="All">Tous</option>
-        <option value="Paris">Paris</option>
-        <option value="Lyon">Lyon</option>
-        <option value="Marseille">Marseille</option>
-        <option value="Bordeaux">Bordeaux</option>
+        <option value="Paris">LE HAVRE</option>
+      
       </select>
 
       <label style={{ marginLeft: "20px" }}>Filtrer par mois : </label>

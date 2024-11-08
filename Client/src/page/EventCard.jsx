@@ -1,7 +1,13 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import immg from '../image/theatre.jpg';
 
 const EventCard = () => {
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate("/calendar");
+  };
+
   return (
     <div style={styles.cardContainer}>
       {/* Image de l'événement */}
@@ -11,14 +17,13 @@ const EventCard = () => {
           alt="Théâtre"
           style={styles.image}
         />
-
       </div>
 
       {/* Informations de l'événement */}
       <div style={styles.eventDetails}>
         <h2 style={styles.title}>Titre de l'évènement</h2>
         <hr style={styles.divider} />
-        <p><strong>Horaires :</strong> Lun 12 Sept<br/>De 00h00 à 00h00</p>
+        <p><strong>Horaires :</strong> Lun 12 Sept<br />De 00h00 à 00h00</p>
         <p><strong>Lieu :</strong> Le Havre</p>
         <p><strong>Type d'évènement :</strong></p>
         <p><strong>Organisateurs :</strong></p>
@@ -36,7 +41,9 @@ const EventCard = () => {
 
       {/* Bouton "Revenir au Calendrier" */}
       <div style={styles.backButton}>
-        <button style={styles.button}>Revenir au Calendrier</button>
+        <button style={styles.button} onClick={handleBackClick}>
+          Revenir au Calendrier
+        </button>
       </div>
     </div>
   );

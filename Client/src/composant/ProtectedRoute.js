@@ -1,4 +1,3 @@
-import React from "react";
 import { Navigate } from "react-router-dom";
 
 // Remplacez `isAuthenticated` par un système d'authentification réel

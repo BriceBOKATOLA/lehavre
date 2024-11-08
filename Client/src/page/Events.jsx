@@ -1,4 +1,5 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const Events = () => {
   return (
@@ -34,9 +35,15 @@ const EventSection = ({ title, events }) => {
 
 // Carte d'événement individuelle
 const EventCard = ({ event }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/EventCard`, { state: { event } });
+  };
+
   return (
-    <div style={styles.eventCard}>
-      <img src={event.image} alt="Event" style={styles.eventImage} />
+    <div style={styles.eventCard} onClick={handleCardClick}>
+      <img src={event.image} alt="Events" style={styles.eventImage} />
       <div style={styles.eventInfo}>
         <h3 style={styles.eventTitle}>{event.title}</h3>
         <p style={styles.eventDetails}>Horaires : Lun 12 Sept</p>
@@ -50,9 +57,8 @@ const EventCard = ({ event }) => {
 const dummyEvents = [
   {
     title: "Titre événement",
-    image: "image", 
+    image: "", 
   },
-
 ];
 
 // Styles en ligne pour l'interface
@@ -86,7 +92,7 @@ const styles = {
     marginBottom: "30px",
   },
   sectionTitle: {
-    color: "#4CAF50", // Couleur verte
+    color: "#4CAF50",
     fontSize: "20px",
     fontWeight: "bold",
     textAlign: "left",
@@ -106,6 +112,7 @@ const styles = {
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     overflow: "hidden",
     width: "180px",
+    cursor: "pointer",
   },
   eventImage: {
     width: "80px",

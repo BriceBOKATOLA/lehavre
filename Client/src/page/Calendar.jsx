@@ -10,9 +10,7 @@ import FilterPanel from "../composant/filtrePanel";
 const Calendar = () => {
   const [events, setEvents] = useState([
     { title: "Événement 1", date: "2024-11-12", category: "Emploi", location: "Paris" },
-    { title: "Événement 2", date: "2024-11-15", category: "Personnel", location: "Lyon" },
-    { title: "Événement 3", date: "2024-12-01", category: "Santé", location: "Marseille" },
-    { title: "Événement 4", date: "2024-12-05", category: "Travail", location: "Bordeaux" },
+
   ]);
 
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -24,7 +22,7 @@ const Calendar = () => {
 
   const handleDateClick = (info) => {
     const title = prompt("Entrez le titre de l'événement:");
-    const category = prompt("Entrez la catégorie de l'événement (Emploi, Travail, Personnel, Santé) :");
+    const category = prompt("Entrez la catégorie de l'événement (Emploi, Travail) :");
     const location = prompt("Entrez le lieu de l'événement :");
 
     if (title && category && location) {
@@ -63,6 +61,7 @@ const Calendar = () => {
 
   return (
     <div style={{ padding: "20px" }}>
+
       <h1>Calendrier des événements</h1>
       
       <FilterPanel
@@ -83,8 +82,8 @@ const Calendar = () => {
         dateClick={handleDateClick}
         headerToolbar={{
           left: "prev,next today",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay",
+          center: "",
+          right: '',
         }}
         selectable={true}
         editable={true}
