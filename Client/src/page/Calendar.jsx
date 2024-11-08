@@ -51,18 +51,21 @@ const Calendar = () => {
 const styles = {
   container: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row",      // Aligne les éléments horizontalement
     padding: "20px",
-    gap: "20px", // Espace entre le calendrier et la section des événements
+    gap: "20px",               // Espace entre le calendrier et les événements
     margin: "50px",
   },
   calendarContainer: {
-    flex: 3, // Largeur pour le calendrier
+    flex: 3,                   // Largeur pour le calendrier
     minWidth: "600px",
   },
   eventsContainer: {
-    flex: 1, // Largeur pour la section des événements
+    flex: 1,                   // Largeur pour la section des événements
     minWidth: "300px",
+    display: "flex",           // Assure que les événements sont bien alignés horizontalement
+    flexDirection: "column",   // Garde les événements dans une colonne si nécessaire
+    gap: "20px",               // Espacement entre les événements
   },
 };
 

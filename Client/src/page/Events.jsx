@@ -36,22 +36,22 @@ const Events = ({ showBackButton = true }) => {
 
 // Section des événements (Emploi & Formation)
 const EventSection = ({ title, events, showAll }) => {
-  // Limiter l'affichage à 5 événements
   const eventsToDisplay = showAll ? events : events.slice(0, 5);
 
   return (
     <div style={styles.section}>
       <h2 style={styles.sectionTitle}>{title}</h2>
-      {eventsToDisplay.map((event, index) => (
-        <React.Fragment key={index}>
-          <EventCard event={event} />
-          {/* Ajoute une ligne de séparation sauf après le dernier événement */}
-          {index < eventsToDisplay.length - 1 && <hr style={styles.divider} />}
-        </React.Fragment>
-      ))}
+      <div style={styles.eventsList}>  {/* Ajout d'un conteneur flex pour les événements */}
+        {eventsToDisplay.map((event, index) => (
+          <React.Fragment key={index}>
+            <EventCard event={event} />
+          </React.Fragment>
+        ))}
+      </div>
     </div>
   );
 };
+
 
 // Carte d'événement individuelle
 const EventCard = ({ event }) => {
@@ -140,13 +140,19 @@ const styles = {
     marginBottom: "10px",
     paddingLeft: "10px",
   },
+  eventsList: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+    justifyContent: "center",
+  },
   eventCard: {
     display: "flex",
     backgroundColor: "#fff",
     borderRadius: "4px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     overflow: "hidden",
-    width: "300px",
+    width: "270px",
   },
   eventImage: {
     width: "80px",
