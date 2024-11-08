@@ -6,3 +6,4 @@ Client/node_modules/
 /Client/node_modules/.cache
 /Server/EnvServer
 /Server/EnvServer
+/Client/src/db/__pycache__
