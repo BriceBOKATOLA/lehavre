@@ -75,15 +75,15 @@ const dummyEvents = [
   },
   {
     title: "Titre événement 2",
-    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+    image :"https://archicree.com/storage/2024/06/152136-min.png"
   },
   {
     title: "Titre événement 3",
-    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+    image: "https://www.ouestpark.com/wp-content/uploads/banniere-ouestpark.jpeg",
   },
   {
     title: "Titre événement 4",
-    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+    image :"https://static.actu.fr/uploads/2018/04/Geants-Royal-Luxe-LeHavre-854x569.jpg"
   },
   {
     title: "Titre événement 5",
