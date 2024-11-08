@@ -4,12 +4,22 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import frLocale from "@fullcalendar/core/locales/fr";
+import dayjs from "dayjs";
+import FilterPanel from "../composant/filtrePanel";
+import Events from "./Events";
 
 const Calendar = () => {
   const [events, setEvents] = useState([
-    { title: "Événement 1", date: "2024-11-12" },
-    { title: "Événement 2", date: "2024-11-15" },
+    { title: "Événement 1", date: "2024-11-12", category: "Emploi", location: "Paris" },
+
   ]);
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState("All");
+  const [selectedMonth, setSelectedMonth] = useState(dayjs().format("YYYY-MM"));
+
+  // Référence pour accéder à l'instance de FullCalendar
+  const calendarRef = useRef(null);
 
   const handleDateClick = (info) => {
     const title = prompt("Entrez le titre de l'événement:");
@@ -51,21 +61,44 @@ const Calendar = () => {
   });
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px" , margin: "50px" }}>
+
+      <h1>Calendrier des événements</h1>
+      
+      <FilterPanel
+        selectedCategories={selectedCategories}
+        onCategoryChange={handleCategoryChange}
+        selectedLocation={selectedLocation}
+        onLocationChange={handleLocationChange}
+        selectedMonth={selectedMonth}
+        onMonthChange={handleMonthChange}
+      />
+
+<div style={styles.container}>
+      {/* Section du calendrier */}
+      <div style={styles.calendarContainer}>
+
       <FullCalendar
+        ref={calendarRef} // Ajout de la référence
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        locale={frLocale} // Définit la langue française
-        events={events} // Passe les événements existants
-        dateClick={handleDateClick} // Gère les clics pour ajouter des événements
+        locale={frLocale}
+        events={filteredEvents}
+        dateClick={handleDateClick}
         headerToolbar={{
           left: "prev,next today",
           center: "",
           right: '',
         }}
-        selectable={true} // Permet la sélection de dates
-        editable={true} // Permet de déplacer les événements
+        selectable={true}
+        editable={true}
       />
+    </div>
+        {/* Section des événements */}
+        <div style={styles.eventsContainer}>
+        <Events showBackButton={false} /> {/* Cacher le bouton */}
+      </div>
+    </div>
     </div>
   );
 };
@@ -73,21 +106,18 @@ const Calendar = () => {
 const styles = {
   container: {
     display: "flex",
-    flexDirection: "row",      // Aligne les éléments horizontalement
+    flexDirection: "row",
     padding: "20px",
-    gap: "20px",               // Espace entre le calendrier et les événements
+    gap: "20px", // Espace entre le calendrier et la section des événements
     margin: "50px",
   },
   calendarContainer: {
-    flex: 3,                   // Largeur pour le calendrier
+    flex: 3, // Largeur pour le calendrier
     minWidth: "600px",
   },
   eventsContainer: {
-    flex: 1,                   // Largeur pour la section des événements
+    flex: 1, // Largeur pour la section des événements
     minWidth: "300px",
-    display: "flex",           // Assure que les événements sont bien alignés horizontalement
-    flexDirection: "column",   // Garde les événements dans une colonne si nécessaire
-    gap: "20px",               // Espacement entre les événements
   },
 };
 

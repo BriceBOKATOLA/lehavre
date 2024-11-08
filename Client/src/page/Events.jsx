@@ -1,4 +1,5 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 
 const Events = ({ showBackButton = true }) => {
   // État pour savoir si l'on affiche tous les événements ou seulement 5
@@ -43,10 +44,12 @@ const EventSection = ({ title, events, showAll }) => {
       <h2 style={styles.sectionTitle}>{title}</h2>
       <div style={styles.eventsList}>  {/* Ajout d'un conteneur flex pour les événements */}
         {eventsToDisplay.map((event, index) => (
-          <React.Fragment key={index}>
-            <EventCard event={event} />
-          </React.Fragment>
-        ))}
+       <React.Fragment key={index}>
+       <EventCard event={event} />
+       {/* Ajoute une ligne de séparation sauf après le dernier événement */}
+       {index < eventsToDisplay.length - 1 && <hr style={styles.divider} />}
+     </React.Fragment>
+   ))}
       </div>
     </div>
   );
@@ -76,8 +79,32 @@ const EventCard = ({ event }) => {
 // Données d'exemple
 const dummyEvents = [
   {
-    title: "Titre événement",
-    image: "image", 
+    title: "Titre événement 1",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
+  {
+    title: "Titre événement 2",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
+  {
+    title: "Titre événement 3",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
+  {
+    title: "Titre événement 4",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
+  {
+    title: "Titre événement 5",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
+  {
+    title: "Titre événement 6",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
+  },
+  {
+    title: "Titre événement 7",
+    image: "https://www.lehavre-etretat-tourisme.com/uploads/2020/04/le-havre_0000-00_week-end-de-la-glisse_erik-levilly-ville-du-havre.jpg", 
   },
 
 ];
@@ -129,13 +156,20 @@ const styles = {
     gap: "20px",
     justifyContent: "center",
   },
+  eventRow: {
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "10px",
+    justifyContent: "space-evenly",
+    padding: "5px",
+  },
   eventCard: {
     display: "flex",
     backgroundColor: "#fff",
     borderRadius: "4px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     overflow: "hidden",
-    width: "180px",
+    width: "300px",
   },
   eventImage: {
     width: "80px",
