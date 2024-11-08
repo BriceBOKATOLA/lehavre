@@ -11,6 +11,34 @@
         {
             "username": "alexsmith",
             "pwd": "pass789"
+        },
+        {
+            "username": "mariajohnson",
+            "pwd": "mypass321"
+        },
+        {
+            "username": "emilydavis",
+            "pwd": "emilypass999"
+        },
+        {
+            "username": "michaelbrown",
+            "pwd": "brownie123"
+        },
+        {
+            "username": "chriswilson",
+            "pwd": "wilsonpass123"
+        },
+        {
+            "username": "nancymiller",
+            "pwd": "nancy789"
+        },
+        {
+            "username": "tommartin",
+            "pwd": "martin456"
+        },
+        {
+            "username": "lisathomas",
+            "pwd": "lisa2024"
         }
     ],
     "events": [
@@ -40,6 +68,159 @@
             "event_type": "Festival",
             "organisators": "Live Nation",
             "description": "Three days of live music from a variety of genres, food, and entertainment."
+        },
+        {
+            "title": "Startup Pitch Day",
+            "date_begin": "2024-05-15T09:00:00",
+            "date_end": "2024-05-15T17:00:00",
+            "place": "Silicon Valley",
+            "event_type": "Pitch",
+            "organisators": "Startup Hub",
+            "description": "A day for startups to pitch their ideas to investors and receive feedback."
+        },
+        {
+            "title": "AI & Robotics Symposium",
+            "date_begin": "2024-07-20T08:00:00",
+            "date_end": "2024-07-21T18:00:00",
+            "place": "Boston Tech Arena",
+            "event_type": "Symposium",
+            "organisators": "Robotics World",
+            "description": "Experts discuss the latest advancements in AI and robotics."
+        },
+        {
+            "title": "Annual Literature Festival",
+            "date_begin": "2024-10-01T10:00:00",
+            "date_end": "2024-10-03T18:00:00",
+            "place": "City Library",
+            "event_type": "Festival",
+            "organisators": "Readers Club",
+            "description": "A celebration of literature with authors, book readings, and discussions."
+        },
+        {
+            "title": "International Food Fair",
+            "date_begin": "2024-09-15T10:00:00",
+            "date_end": "2024-09-15T22:00:00",
+            "place": "Downtown Square",
+            "event_type": "Fair",
+            "organisators": "Gourmet Association",
+            "description": "A food festival featuring cuisines from around the world."
+        },
+        {
+            "title": "Blockchain and Crypto Summit",
+            "date_begin": "2024-11-05T09:00:00",
+            "date_end": "2024-11-06T17:00:00",
+            "place": "San Francisco Conference Center",
+            "event_type": "Summit",
+            "organisators": "Crypto World",
+            "description": "A summit covering the latest trends and insights in blockchain and cryptocurrency."
+        },
+        {
+            "title": "Green Energy Expo",
+            "date_begin": "2024-12-10T08:00:00",
+            "date_end": "2024-12-12T17:00:00",
+            "place": "Eco Park",
+            "event_type": "Expo",
+            "organisators": "Eco Innovations",
+            "description": "An exposition of the latest innovations in sustainable and green energy."
+        },
+        {
+            "title": "New Year's Gala",
+            "date_begin": "2024-12-31T20:00:00",
+            "date_end": "2025-01-01T02:00:00",
+            "place": "Grand Ballroom",
+            "event_type": "Gala",
+            "organisators": "Celebrations Inc.",
+            "description": "Ring in the New Year with a formal gala, live music, and a grand countdown."
+        },
+        {
+            "title": "Charity Run",
+            "date_begin": "2024-03-10T07:00:00",
+            "date_end": "2024-03-10T12:00:00",
+            "place": "City Park",
+            "event_type": "Sports",
+            "organisators": "Health for All",
+            "description": "A charity run to raise funds for local health initiatives."
+        },
+        {
+            "title": "International Film Festival",
+            "date_begin": "2024-08-01T18:00:00",
+            "date_end": "2024-08-10T22:00:00",
+            "place": "Cinema House",
+            "event_type": "Festival",
+            "organisators": "Global Cinema",
+            "description": "Screenings of award-winning films from around the world."
+        },
+        {
+            "title": "Vintage Car Show",
+            "date_begin": "2024-09-05T09:00:00",
+            "date_end": "2024-09-06T18:00:00",
+            "place": "Expo Center",
+            "event_type": "Exhibition",
+            "organisators": "Classic Wheels",
+            "description": "A showcase of vintage and classic cars from various eras."
+        },
+        {
+            "title": "Marathon",
+            "date_begin": "2024-11-20T06:00:00",
+            "date_end": "2024-11-20T15:00:00",
+            "place": "City Streets",
+            "event_type": "Sports",
+            "organisators": "Marathon Club",
+            "description": "Annual city marathon with participants from around the world."
+        },
+        {
+            "title": "Winter Wonderland",
+            "date_begin": "2024-12-01T10:00:00",
+            "date_end": "2024-12-25T22:00:00",
+            "place": "City Center",
+            "event_type": "Festival",
+            "organisators": "Holiday Events",
+            "description": "A festive market with food, crafts, and holiday-themed entertainment."
+        },
+        {
+            "title": "Science and Tech Fair",
+            "date_begin": "2024-11-01T09:00:00",
+            "date_end": "2024-11-03T18:00:00",
+            "place": "Tech Arena",
+            "event_type": "Expo",
+            "organisators": "Future Science",
+            "description": "A fair showcasing innovations in science and technology."
+        },
+        {
+            "title": "Opera Night",
+            "date_begin": "2024-10-20T19:00:00",
+            "date_end": "2024-10-20T22:00:00",
+            "place": "Grand Theater",
+            "event_type": "Concert",
+            "organisators": "City Opera",
+            "description": "An evening of classic opera performances."
+        },
+        {
+            "title": "Fashion Week",
+            "date_begin": "2024-09-18T10:00:00",
+            "date_end": "2024-09-22T22:00:00",
+            "place": "Fashion District",
+            "event_type": "Expo",
+            "organisators": "Fashion Council",
+            "description": "Runway shows and events featuring top designers."
+        },
+        {
+            "title": "Jazz in the Park",
+            "date_begin": "2024-06-15T14:00:00",
+            "date_end": "2024-06-15T20:00:00",
+            "place": "City Park",
+            "event_type": "Concert",
+            "organisators": "Jazz Collective",
+            "description": "A relaxed afternoon of jazz performances in the park."
+        },
+        {
+            "title": "E-Sports Championship",
+            "date_begin": "2024-07-10T09:00:00",
+            "date_end": "2024-07-12T21:00:00",
+            "place": "E-Sports Arena",
+            "event_type": "Tournament",
+            "organisators": "Gaming League",
+            "description": "Top gamers compete in a three-day e-sports championship."
         }
     ]
 }
