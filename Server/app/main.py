@@ -29,11 +29,11 @@ class Main:
 
         #DataBase.ModifyUser(self.con, ("janedoe2", "securepass4562"), 3)
         
-        DataBase.DeleteUser(self.con, 4)
+        #DataBase.DeleteUser(self.con, 4)
         # Exécuter les méthodes CRUD sur les événements
         for event in data['events']:
             # Créer un événement
-            DataBase.CreateEvenement(self.con, (
+            DataBase.CreateEvent(self.con, (
                 event['title'], 
                 event['date_begin'], 
                 event['date_end'], 
@@ -42,7 +42,7 @@ class Main:
                 event['organisators'], 
                 event['description']
             ))
-
+        print(DataBase.ShowEventByFilter(self.con, ["Marché", "Concert"]))
         # Fermer la connexion
         DataBase.sql_close(self.con)
 
