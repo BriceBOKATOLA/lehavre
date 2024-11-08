@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Convergence';
+    src: local('Convergence-Regular'),
+        url('../font/Convergence-Regular.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Convergence', sans-serif;
+    margin: 0;
+    padding: 0;
+}
