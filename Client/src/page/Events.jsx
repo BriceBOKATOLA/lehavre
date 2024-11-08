@@ -4,7 +4,10 @@ import React, { useState } from "react";
 const Events = ({ showBackButton = true }) => {
   // État pour savoir si l'on affiche tous les événements ou seulement 5
   const [showAllEvents, setShowAllEvents] = useState(false);
-
+  const navigate = useNavigate();
+  const handleBackClick = () => {
+    navigate("/calendar");
+  };
   // Fonction pour basculer l'état de l'affichage
   const handleShowMore = () => {
     setShowAllEvents(!showAllEvents);
@@ -15,7 +18,7 @@ const Events = ({ showBackButton = true }) => {
       {/* Bouton de retour (affiché seulement si showBackButton est true) */}
       {showBackButton && (
         <div style={styles.header}>
-          <button style={styles.backButton}>← Revenir au Calendrier</button>
+          <button style={styles.backButton} onClick={handleBackClick}>← Revenir au Calendrier</button>
         </div>
       )}
 
