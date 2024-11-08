@@ -72,7 +72,37 @@ class DataBase:
         except Error as e:
             print(f"Erreur lors de la modification de l'utilisateur: {e}")
 
-    def CreateEvenement(con, data):
+    def ShowEvent(con):
+        query = ("SELECT title, date_begin, date_end, place, event_type, organisators, description FROM event")
+        try:
+            cur = con.cursor()        
+            cur.execute(query)
+            rows = cur.fetchall()
+            return rows
+
+        except Error as e:
+            return []
+        
+    def ShowEventByFilter(con, type):
+        clause = "WHERE event_type ="
+        for i in range(0, len(type)):
+            if(i != len(type) - 1):
+                clause += f" '{type[i]}' OR event_type ="
+            else:
+                clause += f" '{type[i]}'"
+
+        query = (f"SELECT title, date_begin, date_end, place, event_type, organisators, description FROM event {clause}")
+        
+        try:
+            cur = con.cursor()        
+            cur.execute(query)
+            rows = cur.fetchall()
+            return rows
+
+        except Error as e:
+            return []
+
+    def CreateEvent(con, data):
         query = ("INSERT OR IGNORE INTO event (title, date_begin, date_end, place, event_type, organisators, description) "
                  "VALUES(?,?,?,?,?,?,?)")
         try:
@@ -92,7 +122,7 @@ class DataBase:
         except Error as e:
             print(f"Erreur lors de l'ajout de l'évenement: {e}")
 
-    def DeleteEvenement(con, id):
+    def DeleteEvent(con, id):
         query = "DELETE FROM event WHERE id = ? RETURNING title"
         try:
             cur = con.cursor()
@@ -113,7 +143,7 @@ class DataBase:
         except Error as e:
             print(f"Erreur lors de la suppression de l'évenement: {e}")
 
-    def UpdateEvenement(con, data, id):
+    def UpdateEvent(con, data, id):
         query = "UPDATE event SET title = ?, date_begin = ? ,date_end = ? ,place = ? ,event_type = ? ,organisators = ? ,description = ?  WHERE id = ?"
         try:
             cur = con.cursor()
