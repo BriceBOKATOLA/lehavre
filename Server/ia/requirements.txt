@@ -1,0 +1,8 @@
+beautifulsoup4
+spacy
+scikit-learn
+email
+imaplib
+html
+logging
+codecs

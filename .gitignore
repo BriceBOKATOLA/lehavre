@@ -7,3 +7,4 @@ Client/node_modules/
 /Server/EnvServer
 /Server/EnvServer
 /Client/src/db/__pycache__
+/Server/env
