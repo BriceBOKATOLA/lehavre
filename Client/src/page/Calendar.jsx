@@ -81,22 +81,21 @@ const Calendar = () => {
 <h2 style={styles.currentMonth}>{dayjs(selectedMonth).format("MMMM YYYY")}</h2>
 
       <div style={styles.container}>
-        <div style={styles.calendarContainer}>
+        <div style={{ padding: "20px", height: "75vh" }}>
           <FullCalendar
-            ref={calendarRef}
+            height='100%'
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             initialView="dayGridMonth"
-            locale={frLocale}
-            events={filteredEvents}
-            dateClick={handleDateClick}
+            locale={frLocale} // Définit la langue française
+            events={events} // Passe les événements existants
+            dateClick={handleDateClick} // Gère les clics pour ajouter des événements
             headerToolbar={{
               left: "prev,next today",
-              center: "",
-              right: '',
+              center: "title",
+              right: 'dayGridMonth,timeGridWeek,timeGridDay',
             }}
-            selectable={true}
-            editable={true}
-            eventContent={renderEventContent} // Ajout de l'icône de travail
+            selectable={true} // Permet la sélection de dates
+            editable={true} // Permet de déplacer les événements
           />
         </div>
         
