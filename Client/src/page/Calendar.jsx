@@ -98,7 +98,6 @@ const Calendar = () => {
             editable={true} // Permet de déplacer les événements
           />
         </div>
-        
         <div style={styles.eventsContainer}>
           <Events showBackButton={false} />
         </div>
